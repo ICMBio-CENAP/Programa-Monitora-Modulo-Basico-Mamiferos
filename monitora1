@@ -1,0 +1,84 @@
+# Programa Monitora - ICMBio
+# Script e funcao para analise de taxas de avistamento protocolo florestal básico (mamíferos e aves)
+# Funcao monitora1 para tabelas e grafico com taxas anuais de avistamento + SD
+# Elildo Carvalho Jr, ICMBio/CENAP
+# Em fase de TESTE
+
+# funcao requer o pacote openair:
+#install.packages(openair)
+
+# pegando diretório do script executado (Necessário usar ctrl/command-shift-s)
+setwd(dirname(parent.frame(2)$ofile))
+
+# ler dados (exemplo)
+dados <- read.csv("20190318_ccac_jamari_2014_2018.csv", sep=",") # dados (nomes de colunas, etc) devem estar no formato da planilha mastoaves do programa Monitora-ICMBio
+
+# funcao monitora1 para gerar grafico de serie temporal das taxas de avistamento
+monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
+{
+  mydata <- x
+  
+  if(missing(y)) { mydata <- mydata }
+  else {  mydata <- subset(mydata, Local...Nome.da.Unidade.de.Conservação == y) } # seleciona UC
+
+  # Preparar dataframe com uma linha por contagem
+  dados2 <- distinct(mydata, Número.da.Estação.Amostral, km.dia.de.amostragem..esforço., data.da.amostragem)
+  dados2 <- dados2[complete.cases(dados2), ] # removendo NAs
+  
+  for(i in 1:nrow(dados2)) {
+    # seleciona uma especie somente 
+    temp <- subset(mydata, Espécies.validadas.para.análise.do.ICMBio == z)
+    temp2 <- subset(temp, data.da.amostragem == dados2$data.da.amostragem[i])
+    dados2$avistamentos[i] <- nrow(temp2)
+    }
+
+  dados2$taxa <- dados2$avistamentos/(dados2$km.dia.de.amostragem..esforço./500)
+  dados2$date <- as.Date(dados2$data.da.amostragem, format = "%d/%m/%Y") # cria data em formato para openair
+  assign("taxas.por.contagem", dados2, envir=globalenv())
+
+  # Depois de organizada a serie temporal:
+  library(openair)
+  media.anual <-  timeAverage(dados2, avg.time = "year", statistic = "mean")
+  sd.anual <-  timeAverage(dados2, avg.time = "year", statistic = "sd")
+  #percentil.anual <-  timeAverage(dados2, avg.time = "year", statistic = "percentile")
+  assign("media.anual", media.anual, envir=globalenv())
+  assign("sd.anual", sd.anual, envir=globalenv())
+
+  # dataframe media e sd
+  ano <- substr(media.anual$date, 1, 4)
+  taxa.media.sd <- cbind(ano, media.anual$taxa, sd.anual$taxa)
+  colnames(taxa.media.sd) <- c("ano", "media", "sd")
+  taxa.media.sd <- data.frame(taxa.media.sd)
+  taxa.media.sd$ano <- as.numeric(levels(taxa.media.sd$ano))[taxa.media.sd$ano]
+  taxa.media.sd$media <- as.numeric(levels(taxa.media.sd$media))[taxa.media.sd$media]
+  taxa.media.sd$sd <- as.numeric(levels(taxa.media.sd$sd))[taxa.media.sd$sd]
+  taxa.media.sd$low <- taxa.media.sd$media-taxa.media.sd$sd
+  taxa.media.sd$up <- taxa.media.sd$media+taxa.media.sd$sd
+  assign("taxas.medias.anuais", taxa.media.sd, envir=globalenv())
+
+  # grafico da serie temporal com média anual da taxa de avistamento e envelope de SD
+  ggplot(data=taxa.media.sd, aes(x=ano,y=media)) +
+  geom_line(alpha=0.5) +
+  #stat_smooth(aes(y=media, x=ano), method = lm, formula = y ~ poly(x, 4), se = FALSE) +
+  geom_point(size=3, alpha=0.5) +
+  #ylim(2*min(taxa.media.sd$low), 2*max(taxa.media.sd$up)) + 
+  geom_ribbon(data=taxa.media.sd, aes(x=ano, ymin=low, ymax=up), fill="steelblue", alpha=0.2) +
+  #geom_hline(yintercept=taxa.media.sd$media[3], linetype="dashed", color = "grey") + # 2016 primeiro ano com esforço decente
+  #geom_vline(xintercept=2016, linetype="dashed", color = "grey") + # 2016 primeiro ano com esforço decente
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  theme(axis.text=element_text(size=12),axis.title=element_text(size=14)) + 
+  xlab("Ano") + 
+  ylab("Taxa de avistamento")
+} # fim da funcao
+
+
+# Alguns testes
+
+monitora1(dados, 'Flona do Jamari', "Dasyprocta cf. fuliginosa")
+taxas.por.contagem
+taxas.medias.anuais
+
+monitora1(dados, 'Flona do Jamari', "Pecari tajacu")
+monitora1(dados, 'Flona do Jamari', "Tayassu pecari")
+monitora1(dados, 'Flona do Jamari', "Nasua nasua")
+monitora1(dados, 'Flona do Jamari', "Urosciurus spadiceus")
