@@ -8,7 +8,7 @@ A função gera dataframes e gráficos (Figura 1) com taxas de avistamento (enco
 A função utiliza o csv da planilha **"mastoaves"** do Programa Monitora-ICMBio. é preciso especificar os dados, a UC e a espécie de interesse.
 
 
-![dasyproctav2](https://user-images.githubusercontent.com/39089964/54637898-816d7800-4a68-11e9-97c3-b8e7f667fc13.jpeg)
+![Rplot](https://user-images.githubusercontent.com/39089964/54637955-a530be00-4a68-11e9-9976-d7f346bd7aa7.jpeg)
 
 Figura 1. Taxas de avistamento de *Dasyprocta fuliginosa* na FLONA do JAMARI, 2014-2018. O envelope sombreado correponde ao SD.
 
