@@ -32,7 +32,8 @@ monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
     dados2$avistamentos[i] <- nrow(temp2)
     }
 
-  dados2$taxa <- dados2$avistamentos/(dados2$km.dia.de.amostragem..esforço./500)
+  dados2$esforço <- as.numeric(dados2$km.dia.de.amostragem..esforço.)
+  dados2$taxa <- (dados2$avistamentos/dados2$esforço)*1000
   dados2$date <- as.Date(dados2$data.da.amostragem, format = "%d/%m/%Y") # cria data em formato para openair
   assign("taxas.por.contagem", dados2, envir=globalenv())
 
