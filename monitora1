@@ -22,6 +22,7 @@ monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
   else {  mydata <- subset(mydata, Local...Nome.da.Unidade.de.Conservação == y) } # seleciona UC
 
   # Preparar dataframe com uma linha por contagem
+  require(dplyr)
   dados2 <- distinct(mydata, Número.da.Estação.Amostral, km.dia.de.amostragem..esforço., data.da.amostragem)
   dados2 <- dados2[complete.cases(dados2), ] # removendo NAs
   
@@ -58,6 +59,7 @@ monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
   assign("taxas.medias.anuais", taxa.media.sd, envir=globalenv())
 
   # grafico da serie temporal com média anual da taxa de avistamento e envelope de SD
+  require(ggplot2)
   ggplot(data=taxa.media.sd, aes(x=ano,y=media)) +
   geom_line(alpha=0.5) +
   #stat_smooth(aes(y=media, x=ano), method = lm, formula = y ~ poly(x, 4), se = FALSE) +
