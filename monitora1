@@ -1,7 +1,7 @@
 # Programa Monitora - ICMBio
 # Script e funcao para analise de taxas de avistamento protocolo florestal básico (mamíferos e aves)
 # Funcao monitora1 para tabelas e grafico com taxas anuais de avistamento + SD
-# Elildo Carvalho Jr, ICMBio/CENAP
+# Elildo Carvalho Jr @ ICMBio/CENAP
 # Em fase de TESTE
 
 # pegando diretório do script executado (Necessário usar ctrl/command-shift-s)
@@ -70,15 +70,3 @@ monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
   xlab("Ano") + 
   ylab("Taxa de avistamento")
 } # fim da funcao
-
-
-# Alguns testes
-
-monitora1(dados, 'Flona do Jamari', "Dasyprocta cf. fuliginosa")
-taxas.por.contagem
-taxas.medias.anuais
-
-monitora1(dados, 'Flona do Jamari', "Pecari tajacu")
-monitora1(dados, 'Flona do Jamari', "Tayassu pecari")
-monitora1(dados, 'Flona do Jamari', "Nasua nasua")
-monitora1(dados, 'Flona do Jamari', "Urosciurus spadiceus")
