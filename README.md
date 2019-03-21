@@ -12,4 +12,27 @@ A função utiliza o csv da planilha **"mastoaves"** do Programa Monitora-ICMBio
 
 Figura 1. Taxas de avistamento de *Dasyprocta fuliginosa* na FLONA do JAMARI, 2014-2018. O envelope sombreado correponde ao SD.
 
+
+### Instruções para execução do script
+
+1 - Instale os pacotes **openair** e **ggplot2** do R
+
+```r
+install.packages("openair")
+install.packages("ggplot2")
+```
+
+Com isso o script pode ser executado normalmente
+
+
+### Instruções para rodar a função
+
+Depois de ler a função **monitora1**, basta chamar a função como no exemplo
+
+```r
+monitora1(dados, "Flona do Jamari", "Dasyprocta cf. fuliginosa") # roda a função para a espécie *D. fuliginosa* somente para Flona do Jamari
+monitora1(dados, z="Dasyprocta cf. fuliginosa") roda a função para a espécie *D. fuliginosa* incluindo todas as UCs onde a espécie ocorreu
+
+```
+
 Contribuições são bem vindas! Também agradecemos se alguém nos informar sobre eventuais erros.
