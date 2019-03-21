@@ -4,9 +4,6 @@
 # Elildo Carvalho Jr, ICMBio/CENAP
 # Em fase de TESTE
 
-# funcao requer o pacote openair:
-#install.packages(openair)
-
 # pegando diretório do script executado (Necessário usar ctrl/command-shift-s)
 setwd(dirname(parent.frame(2)$ofile))
 
@@ -39,7 +36,7 @@ monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
   assign("taxas.por.contagem", dados2, envir=globalenv())
 
   # Depois de organizada a serie temporal:
-  library(openair)
+  require(openair)
   media.anual <-  timeAverage(dados2, avg.time = "year", statistic = "mean")
   sd.anual <-  timeAverage(dados2, avg.time = "year", statistic = "sd")
   #percentil.anual <-  timeAverage(dados2, avg.time = "year", statistic = "percentile")
