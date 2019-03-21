@@ -53,7 +53,7 @@ monitora1 <- function(x,y,z) # x = dados, y = UC, z = espécie
   taxa.media.sd$sd <- as.numeric(levels(taxa.media.sd$sd))[taxa.media.sd$sd]
   taxa.media.sd$low <- taxa.media.sd$media-taxa.media.sd$sd
   taxa.media.sd$up <- taxa.media.sd$media+taxa.media.sd$sd
-  assign("taxas.medias.anuais", taxa.media.sd, envir=globalenv())
+  assign("taxas.medias.anuais", taxa.media.sd[,1:3], envir=globalenv())
 
   # grafico da serie temporal com média anual da taxa de avistamento e envelope de SD
   require(ggplot2)
