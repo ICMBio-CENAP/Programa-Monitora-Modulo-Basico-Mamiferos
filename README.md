@@ -13,7 +13,7 @@ A função utiliza o csv da planilha **"mastoaves"** do Programa Monitora-ICMBio
 Figura 1. Taxas de avistamento de *Dasyprocta fuliginosa* na FLONA do JAMARI, 2014-2018. O envelope sombreado correponde ao SD.
 
 
-### Pré-requsitos
+### Pré-requisitos
 
 Instale os pacotes **openair** e **ggplot2** do R
 
@@ -37,7 +37,7 @@ monitora1(dados, y=c("Resex Cazumbá-iracema", "Resex Tapajós-Arapiuns"), z="Da
 
 A função gera o gráfico automaticamente. Para visualizar os dataframes com as taxas de avistamento:
 ```r
-taxas.por.contagem # exibe as taxas de avistamento por transecção realizada
+taxas.por.contagem # exibe as taxas de avistamento por transecção individual
 taxas.medias.anuais # exibe as taxas médias de avistamento por ano e SD 
 ```
 
