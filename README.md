@@ -38,7 +38,7 @@ monitora1(dados, y=c("Resex Cazumbá-iracema", "Resex Tapajós-Arapiuns"), z="Da
 A função gera o gráfico automaticamente. Para visualizar os dataframes com as taxas de avistamento:
 ```r
 taxas.por.contagem # exibe as taxas de avistamento por transecção realizada
-taxas.medias.anuais # exibe as taxas médias de avistamento por ano, SD média-SD (low) e média+SD (up) 
+taxas.medias.anuais # exibe as taxas médias de avistamento por ano e SD 
 ```
 
 Observação: Algumas UCs possuem dados incompletos para alguns anos (por exemplo, apenas uma trilha do Monitora implantada em 2014), nesses casos, é recomendável excluir esses anos da planilha ANTES de rodar a função.
