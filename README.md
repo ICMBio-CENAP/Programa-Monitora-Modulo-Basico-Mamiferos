@@ -13,9 +13,9 @@ A função utiliza o csv da planilha **"mastoaves"** do Programa Monitora-ICMBio
 Figura 1. Taxas de avistamento de *Dasyprocta fuliginosa* na FLONA do JAMARI, 2014-2018. O envelope sombreado correponde ao SD.
 
 
-### Instruções para execução do script
+### Pré-requsitos
 
-1 - Instale os pacotes **openair** e **ggplot2** do R
+Instale os pacotes **openair** e **ggplot2** do R
 
 ```r
 install.packages("openair")
@@ -27,12 +27,13 @@ Com isso o script pode ser executado normalmente
 
 ### Instruções para rodar a função
 
-Depois de ler a função **monitora1**, basta chamar a função como no exemplo
+Depois de copiar e rodar a função **monitora1** no script, basta aplicar aos dados da UC e espécie de interesse conforme o exemplo:
 
 ```r
-monitora1(dados, "Flona do Jamari", "Dasyprocta cf. fuliginosa") # roda a função para a espécie *D. fuliginosa* somente para Flona do Jamari
-monitora1(dados, z="Dasyprocta cf. fuliginosa") roda a função para a espécie *D. fuliginosa* incluindo todas as UCs onde a espécie ocorreu
-
+monitora1(dados, "Flona do Jamari", "Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* somente para Flona do Jamari
+monitora1(dados, z="Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* incluindo todas as UCs onde a espécie ocorreu
+monitora1(dados, y=c("Resex Cazumbá-iracema", "Resex Tapajós-Arapiuns", z="Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* incluindo duas Resex simultaneamente
 ```
+Algumas UCs possuem dados incompletos para alguns anos (por exemplo, apenas uma trilha do Monitora implantada em 2014), nesses casos, é recomendável excluir esses anos da planilha ANTES de rodar a função.
 
 Contribuições são bem vindas! Também agradecemos se alguém nos informar sobre eventuais erros.
