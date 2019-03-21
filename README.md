@@ -32,7 +32,7 @@ Depois de copiar e rodar a função **monitora1** no script, basta aplicar aos d
 ```r
 monitora1(dados, "Flona do Jamari", "Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* somente para Flona do Jamari
 monitora1(dados, z="Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* incluindo todas as UCs onde a espécie ocorreu
-monitora1(dados, y=c("Resex Cazumbá-iracema", "Resex Tapajós-Arapiuns", z="Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* incluindo duas Resex simultaneamente
+monitora1(dados, y=c("Resex Cazumbá-iracema", "Resex Tapajós-Arapiuns"), z="Dasyprocta cf. fuliginosa") # roda a função para *D. fuliginosa* incluindo duas Resex simultaneamente
 ```
 Algumas UCs possuem dados incompletos para alguns anos (por exemplo, apenas uma trilha do Monitora implantada em 2014), nesses casos, é recomendável excluir esses anos da planilha ANTES de rodar a função.
 
